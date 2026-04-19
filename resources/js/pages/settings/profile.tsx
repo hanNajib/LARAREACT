@@ -6,26 +6,29 @@ import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { __ } from '@/lib/helpers';
 import { edit } from '@/routes/profile';
+import type { Auth } from '@/types';
 
 export default function Profile({
     status,
 }: {
     status?: string;
 }) {
-    const { auth } = usePage().props;
+    const { auth } = usePage<{ auth: Auth }>().props;
+    const user = auth.user!;
 
     return (
         <>
-            <Head title="Profile settings" />
+            <Head title={__('Profile settings')} />
 
-            <h1 className="sr-only">Profile settings</h1>
+            <h1 className="sr-only">{__('Profile settings')}</h1>
 
             <div className="space-y-6">
                 <Heading
                     variant="small"
-                    title="Profile information"
-                    description="Update your username and profile details"
+                    title={__('Profile information')}
+                    description={__('Update your username and profile details')}
                 />
 
                 <Form
@@ -38,16 +41,16 @@ export default function Profile({
                     {({ processing, errors }) => (
                         <>
                             <div className="grid gap-2">
-                                <Label htmlFor="username">Username</Label>
+                                <Label htmlFor="username">{__('Username')}</Label>
 
                                 <Input
                                     id="username"
                                     className="mt-1 block w-full"
-                                    defaultValue={auth.user.username}
+                                        defaultValue={user.username}
                                     name="username"
                                     required
                                     autoComplete="username"
-                                    placeholder="Username"
+                                    placeholder={__('Username')}
                                 />
 
                                 <InputError
@@ -57,17 +60,17 @@ export default function Profile({
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
+                                <Label htmlFor="email">{__('Email address')}</Label>
 
                                 <Input
                                     id="email"
                                     type="email"
                                     className="mt-1 block w-full"
-                                    defaultValue={auth.user.email}
+                                        defaultValue={user.email}
                                     name="email"
                                     required
                                     autoComplete="username"
-                                    placeholder="Email address"
+                                    placeholder={__('Email address')}
                                 />
 
                                 <InputError
@@ -77,16 +80,16 @@ export default function Profile({
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="phone_number">Phone number</Label>
+                                <Label htmlFor="phone_number">{__('Phone number')}</Label>
 
                                 <Input
                                     id="phone_number"
                                     type="text"
                                     className="mt-1 block w-full"
-                                    defaultValue={auth.user.phone_number ?? ''}
+                                        defaultValue={user.phone_number ?? ''}
                                     name="phone_number"
                                     autoComplete="tel"
-                                    placeholder="+62..."
+                                    placeholder={__('Phone number')}
                                 />
 
                                 <InputError
@@ -96,15 +99,15 @@ export default function Profile({
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="profile_image">Profile image URL</Label>
+                                <Label htmlFor="profile_image">{__('Profile image URL')}</Label>
 
                                 <Input
                                     id="profile_image"
                                     type="url"
                                     className="mt-1 block w-full"
-                                    defaultValue={auth.user.profile_image ?? ''}
+                                        defaultValue={user.profile_image ?? ''}
                                     name="profile_image"
-                                    placeholder="https://example.com/avatar.jpg"
+                                    placeholder={__('Profile image URL')}
                                 />
 
                                 <InputError
@@ -114,14 +117,14 @@ export default function Profile({
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="bio">Bio</Label>
+                                <Label htmlFor="bio">{__('Bio')}</Label>
 
                                 <textarea
                                     id="bio"
                                     className="mt-1 min-h-24 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs outline-none transition-[color,box-shadow] placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
-                                    defaultValue={auth.user.bio ?? ''}
+                                        defaultValue={user.bio ?? ''}
                                     name="bio"
-                                    placeholder="Tell us a little about yourself"
+                                    placeholder={__('Tell us a little about yourself')}
                                 />
 
                                 <InputError
@@ -131,8 +134,8 @@ export default function Profile({
                             </div>
 
                             {status === 'profile-updated' && (
-                                <div className="text-sm font-medium text-green-600">
-                                    Profile updated successfully.
+                                <div className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
+                                    {__('Profile updated successfully.')}
                                 </div>
                             )}
 
@@ -141,7 +144,7 @@ export default function Profile({
                                     disabled={processing}
                                     data-test="update-profile-button"
                                 >
-                                    Save
+                                    {__('Save')}
                                 </Button>
                             </div>
                         </>
@@ -157,7 +160,7 @@ export default function Profile({
 Profile.layout = {
     breadcrumbs: [
         {
-            title: 'Profile settings',
+            title: __('Profile settings'),
             href: edit(),
         },
     ],

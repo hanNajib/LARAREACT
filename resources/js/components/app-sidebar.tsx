@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
@@ -16,12 +16,28 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
-import { footerNavItems, mainNavItems } from '@/config/menu';
 import { useCurrentUrl } from '@/hooks/use-current-url';
+import { getFooterNavItems, getMainNavItems } from '@/config/menu';
+import { useMemo } from 'react';
 
 
 export function AppSidebar() {
     const { isCurrentUrl } = useCurrentUrl();
+    const { props } = usePage();
+    const translation = (props as any).translations || {};
+
+    const mainNavItems = useMemo(() => {
+        return getMainNavItems((key: string) => {
+            return translation[key] || key;
+        });
+    }, [translation]);
+
+    const footerNavItems = useMemo(() => {
+        return getFooterNavItems((key: string) => {
+            return translation[key] || key;
+        });
+    }, [translation]);
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>

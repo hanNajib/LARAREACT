@@ -6,13 +6,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
+import { __ } from '@/lib/helpers';
 import { login } from '@/routes';
 import { store } from '@/routes/register';
 
 export default function Register() {
     return (
         <>
-            <Head title="Register" />
+            <Head title={__('Register')} />
             <Form
                 {...store.form()}
                 resetOnSuccess={['password', 'password_confirmation']}
@@ -23,7 +24,7 @@ export default function Register() {
                     <>
                         <div className="grid gap-6">
                             <div className="grid gap-2">
-                                <Label htmlFor="username">Username</Label>
+                                <Label htmlFor="username">{__('Username')}</Label>
                                 <Input
                                     id="username"
                                     type="text"
@@ -32,7 +33,7 @@ export default function Register() {
                                     tabIndex={1}
                                     autoComplete="username"
                                     name="username"
-                                    placeholder="Username"
+                                    placeholder={__('Username')}
                                 />
                                 <InputError
                                     message={errors.username}
@@ -41,7 +42,7 @@ export default function Register() {
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
+                                <Label htmlFor="email">{__('Email address')}</Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -55,21 +56,21 @@ export default function Register() {
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="password">Password</Label>
+                                <Label htmlFor="password">{__('Password')}</Label>
                                 <PasswordInput
                                     id="password"
                                     required
                                     tabIndex={3}
                                     autoComplete="new-password"
                                     name="password"
-                                    placeholder="Password"
+                                    placeholder={__('Password')}
                                 />
                                 <InputError message={errors.password} />
                             </div>
 
                             <div className="grid gap-2">
                                 <Label htmlFor="password_confirmation">
-                                    Confirm password
+                                    {__('Confirm password')}
                                 </Label>
                                 <PasswordInput
                                     id="password_confirmation"
@@ -77,7 +78,7 @@ export default function Register() {
                                     tabIndex={4}
                                     autoComplete="new-password"
                                     name="password_confirmation"
-                                    placeholder="Confirm password"
+                                    placeholder={__('Confirm password')}
                                 />
                                 <InputError
                                     message={errors.password_confirmation}
@@ -91,14 +92,14 @@ export default function Register() {
                                 data-test="register-user-button"
                             >
                                 {processing && <Spinner />}
-                                Create account
+                                {__('Create account')}
                             </Button>
                         </div>
 
                         <div className="text-center text-sm text-muted-foreground">
-                            Already have an account?{' '}
+                            {__('Already have an account?')}{' '}
                             <TextLink href={login()} tabIndex={6}>
-                                Log in
+                                {__('Log in')}
                             </TextLink>
                         </div>
                     </>
@@ -109,6 +110,6 @@ export default function Register() {
 }
 
 Register.layout = {
-    title: 'Create an account',
-    description: 'Enter your details below to create your account',
+    title: __('Create an account'),
+    description: __('Enter your details below to create your account'),
 };

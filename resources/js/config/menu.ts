@@ -12,57 +12,69 @@ import {
     BookOpen,
     Building2,
     Network,
-    UserCog
+    UserCog,
+    type LucideIcon
 } from 'lucide-react';
 
-export const mainNavItems = [
+interface NavItem {
+    title: string;
+    href: string;
+    icon: LucideIcon;
+}
+
+interface NavGroup {
+    group: string;
+    items: NavItem[];
+}
+
+export const getMainNavItems = (__: (key: string) => string): NavGroup[] => [
     {
-        group: "Ringkasan",
+        group: __("Summary"), 
         items: [
-            { title: "Dashboard", href: dashboard(), icon: LayoutGrid },
+            { title: __("Dashboard"), href: dashboard().url, icon: LayoutGrid },
         ],
     },
     {
-        group: "Informasi Publik",
+        group: __("Public Information"),
         items: [
-            { title: "Artikel", href: articles.index(), icon: FileText },
-            { title: "Artikel User", href: "/user-articles", icon: FileText },
-            { title: "Pengumuman", href: "/announcements", icon: Megaphone },
-            { title: "Gambar", href: "/gallery", icon: Image },
+            { title: __("Articles"), href: articles.index().url, icon: FileText },
+            { title: __("User Articles"), href: "/user-articles", icon: FileText },
+            { title: __("Announcements"), href: "/announcements", icon: Megaphone },
+            { title: __("Gallery"), href: "/gallery", icon: Image },
         ],
     },
     {
-        group: "Manajemen Personel",
+        group: __("Personnel Management"),
         items: [
-            { title: "Data Guru", href: "/teachers", icon: Users },
-            { title: "Data Karyawan", href: "/staff", icon: UserCog },
-            { title: "Data Siswa Setting", href: "/student-settings", icon: Users },
-            { title: "User Jurusan", href: "/department-users", icon: GraduationCap },
+            { title: __("Teachers"), href: "/teachers", icon: Users },
+            { title: __("Staff"), href: "/staff", icon: UserCog },
+            { title: __("Students"), href: "/student-settings", icon: Users },
+            { title: __("Department Users"), href: "/department-users", icon: GraduationCap },
         ],
     },
     {
-        group: "Akademik & Sarpras",
+        group: __("Academic & Facilities"),
         items: [
-            { title: "Mapel", href: "/subjects", icon: BookOpen },
-            { title: "Jurusan", href: "/departments", icon: GraduationCap },
-            { title: "Data Fasilitas", href: "/facilities", icon: Building2 }, 
+            { title: __("Subjects"), href: "/subjects", icon: BookOpen },
+            { title: __("Departments"), href: "/departments", icon: GraduationCap },
+            { title: __("Facilities"), href: "/facilities", icon: Building2 }, 
         ],
     },
     {
-        group: "Organisasi & Ekstra",
+        group: __("Organization & Extra"),
         items: [
-            { title: "Struktur Organisasi", href: "/organization", icon: Network },
-            { title: "Ekstrakurikuler", href: "/extracurricular", icon: Activity },
+            { title: __("Organization Structure"), href: "/organization", icon: Network },
+            { title: __("Extracurricular"), href: "/extracurricular", icon: Activity },
         ],
     },
     {
-        group: "Sistem",
+        group: __("System"),
         items: [
-            { title: "Home Setting", href: "/settings/home", icon: Settings },
+            { title: __("Home Setting"), href: "/settings/home", icon: Settings },
         ],
     },
 ];
 
-export const footerNavItems = [
-    // { title: "Settings", href: "/settings", icon: Settings },
+export const getFooterNavItems = (__: (key: string) => string): NavItem[] => [
+    // { title: __("Settings"), href: "/settings", icon: Settings },
 ];

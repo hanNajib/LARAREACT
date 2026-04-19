@@ -7,6 +7,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
+import { __ } from '@/lib/helpers';
 import { register } from '@/routes';
 import { store } from '@/routes/login';
 import { request } from '@/routes/password';
@@ -24,7 +25,7 @@ export default function Login({
 }: Props) {
     return (
         <>
-            <Head title="Log in" />
+            <Head title={__('Log in')} />
 
             <Form
                 {...store.form()}
@@ -35,7 +36,7 @@ export default function Login({
                     <>
                         <div className="grid gap-6">
                             <div className="grid gap-2">
-                                <Label htmlFor="username">Email or username</Label>
+                                <Label htmlFor="username">{__('Email or username')}</Label>
                                 <Input
                                     id="username"
                                     type="text"
@@ -44,21 +45,21 @@ export default function Login({
                                     autoFocus
                                     tabIndex={1}
                                     autoComplete="username"
-                                    placeholder="Email or username"
+                                    placeholder={__('Email or username')}
                                 />
                                 <InputError message={errors.username} />
                             </div>
 
                             <div className="grid gap-2">
                                 <div className="flex items-center">
-                                    <Label htmlFor="password">Password</Label>
+                                    <Label htmlFor="password">{__('Password')}</Label>
                                     {canResetPassword && (
                                         <TextLink
                                             href={request()}
                                             className="ml-auto text-sm"
                                             tabIndex={5}
                                         >
-                                            Forgot password?
+                                            {__('Forgot password?')}
                                         </TextLink>
                                     )}
                                 </div>
@@ -68,7 +69,7 @@ export default function Login({
                                     required
                                     tabIndex={2}
                                     autoComplete="current-password"
-                                    placeholder="Password"
+                                    placeholder={__('Password')}
                                 />
                                 <InputError message={errors.password} />
                             </div>
@@ -79,7 +80,7 @@ export default function Login({
                                     name="remember"
                                     tabIndex={3}
                                 />
-                                <Label htmlFor="remember">Remember me</Label>
+                                <Label htmlFor="remember">{__('Remember me')}</Label>
                             </div>
 
                             <Button
@@ -90,15 +91,15 @@ export default function Login({
                                 data-test="login-button"
                             >
                                 {processing && <Spinner />}
-                                Log in
+                                {__('Log in')}
                             </Button>
                         </div>
 
                         {canRegister && (
                             <div className="text-center text-sm text-muted-foreground">
-                                Don't have an account?{' '}
+                                {__('Don\'t have an account?')}{' '}
                                 <TextLink href={register()} tabIndex={5}>
-                                    Sign up
+                                    {__('Sign up')}
                                 </TextLink>
                             </div>
                         )}
@@ -107,7 +108,7 @@ export default function Login({
             </Form>
 
             {status && (
-                <div className="mb-4 text-center text-sm font-medium text-green-600">
+                <div className="mb-4 text-center text-sm font-medium text-emerald-600 dark:text-emerald-400">
                     {status}
                 </div>
             )}
@@ -116,6 +117,6 @@ export default function Login({
 }
 
 Login.layout = {
-    title: 'Log in to your account',
-    description: 'Enter your email or username and password below to log in',
+    title: __('Log in to your account'),
+    description: __('Enter your email or username and password below to log in'),
 };

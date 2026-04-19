@@ -20,7 +20,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('dashboard/article/create');
     }
 
     /**
