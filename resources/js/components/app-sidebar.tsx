@@ -36,7 +36,7 @@ export function AppSidebar() {
                 </SidebarMenu>
             </SidebarHeader>
 
-            <SidebarContent>
+            <SidebarContent className="custom-scrollbar">
                 {mainNavItems.map((group) => (
                     <SidebarGroup key={group.group} className="px-2 py-0">
                         <SidebarGroupLabel>{group.group}</SidebarGroupLabel>
