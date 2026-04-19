@@ -1,17 +1,20 @@
 export type User = {
     id: number;
-    name: string;
+    username: string;
     email: string;
-    avatar?: string;
-    email_verified_at: string | null;
+    role: 'superadmin' | 'admin' | 'user';
+    phone_number?: string | null;
+    bio?: string | null;
+    profile_image?: string | null;
     two_factor_enabled?: boolean;
     created_at: string;
     updated_at: string;
+    deleted_at?: string | null;
     [key: string]: unknown;
 };
 
 export type Auth = {
-    user: User;
+    user: User | null;
 };
 
 export type TwoFactorSetupData = {
